@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="./output.css" rel="stylesheet">
+    <title>Search Training</title>
+</head>
+<body>
+    <!-- background  -->
+    <div class="ocean">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+
+    <!-- Inputs container -->
+    <div class=" mx-auto py-20 search-box">
+        <!-- header of box -->
+        <h1 class="text-4xl text-center"> Welcome to the page  </h1>
+        <!-- Input container -->
+        <div class="input-containers py-5">
+           <form class="flex flex-col gap-5 px-2 py-5" x-data="logInForm" @submit.prevent="validateForm()"  action="">
+                <div class="flex items-center gap-4">
+                    <!-- remaining charecter -->
+                    <p class="absolute text-sm text-gray-600 text-right top-40 right-185" 
+                        x-bind:class="{ 'text-red-600': username.length > 10 }"> 
+                         <span x-text="15 - username.length"></span>
+                         character remaining
+                    </p>
+                    
+                    <label class="w-32 text-right" for="username">Username:</label>
+                    
+                    <input 
+                    class="input" 
+                    id="username" 
+                    placeholder="Username..." 
+                    type="text" 
+                    maxlength="15"
+                    x-model="username"    
+                    
+                    />
+
+                    
+                </div>
+
+                <!-- username error  -->
+
+                <template class="text-sm text-center" x-if="errors.username"> 
+                        <p 
+                        class="text-red-600"
+                        x-text="errors.username"
+                        ></p>
+                    </template>
+
+                <div class="flex items-center gap-4">
+                    <label class="w-32 text-right" for="email">Email:</label>
+                    <input 
+                    
+                    class="input" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Email..." 
+                    type="text"
+                    x-model="email"
+                    
+                    />
+                </div>
+
+                <!-- Gmail error  -->
+                 <template x-if="errors.email"> 
+                        <p 
+                        class="text-red-600"
+                        x-text="errors.email"
+                        ></p>
+                    </template>
+
+            <div class="flex items-center gap-4">
+                <label class="w-32 text-right" for="password">Password:</label>
+                
+                <input 
+                
+                class="input" 
+                id="password" 
+                name="password" 
+                placeholder="Enter Password" 
+                :type="showPassword ? 'text' : 'password'"
+                x-model="password" 
+                />
+
+                <button @click="showPassword = !showPassword" class="cursor-pointer relative right-13" type="button"> 
+                    <img x-show="showPassword" class="w-6 h-6" src="https://img.icons8.com/ios-glyphs/30/visible--v1.png" alt="open eyes"/>
+                    <img x-show="!showPassword" class="w-6 h-6" src="https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png" alt="closed eye"/>
+                </button>
+            </div>
+
+            <template x-if="errors.password"> 
+                        <p 
+                        class="text-red-600"
+                        x-text="errors.password"
+                        ></p>
+                    </template>
+            <!-- select the date -->
+                  <div class="flex items-center gap-4">
+                <label class="w-32 text-right"  for="year">Select Year: </label>
+                <select class="input text-center py-1 " id="year" x-model="year">
+                    <option  value=""> -- Select a year --</option>
+                    <template x-for="y in years" :key="y">
+                    <option  :value="y" x-text="y"></option>
+                    </template>
+                </select>
+            </div>
+            <!-- error of the selecct part -->
+                <template x-if="errors.year"> 
+                            <p 
+                            class="text-red-600"
+                            x-text="errors.year"
+                            ></p>
+                </template>
+       
+              <button
+            @click="showMessage = true"
+              type="submit"
+              class="w-full rounded bg-blue-400 text-pink-50 p-2 text-center font-bold hover:bg-blue-600">
+                Log In
+              </button>
+              
+                            <template x-if="showMessage && (username || email || year)">  
+                                <span 
+                                class="text-xl text-center text-gray-500"
+                                x-text="'Hello ' + username + ' with ' + email + ' you selected ' + year"
+                                </span>
+                            </template>
+                    </form>
+        </div>
+        </div>
+
+
+    <script src="./index.js"></script>
+</body>
+</html>

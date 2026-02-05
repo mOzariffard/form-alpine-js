@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* best seen at 1500px or less */
+
+html, body { height: 100%; }
+body {
+  background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
+  overflow: hidden;
+}
+.ocean { 
+  height: 5%;
+  width:100%;
+  position:absolute;
+  bottom:0;
+  left:0;
+  background: #015871;
+}
+
+.wave {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
+  position: absolute;
+  top: -198px;
+  width: 6400px;
+  height: 198px;
+  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+  top: -175px;
+  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+  opacity: 1;
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+
+@keyframes swell {
+  0%, 100% {
+    transform: translate3d(0,-25px,0);
+  }
+  50% {
+    transform: translate3d(0,5px,0);
+  }
+}
+
+:root {
+    --font: "SN Pro", sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+    font-family: var(--font);
+}
+
+@layer components{
+    /* search container */
+    .search-box {
+        @apply flex flex-col justify-center items-center gap-6;
+    }
+
+    /* input of containter */
+
+    .input-containers{
+        @apply bg-[#90e0ef] shadow-lg w-3/6 h-auto flex justify-center items-center gap-2 border-1 border-gray-600 rounded-lg;
+    }
+
+    .input{
+        @apply  bg-white px-4 py-3 outline-none w-[280px] h-[40px] text-gray-500 rounded-lg border-2 transition-colors duration-100 border-solid focus:border-[#596A95] ;
+    }
+
+
+    /* for dropdown */
+    .dropdown{
+      @apply text-lg py-1 focus:outline-0 ;
+    }
+}
+
+
+
+
