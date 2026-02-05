@@ -77,9 +77,9 @@ html{
 
 
     /* for dropdown */
-    .dropdown{
-      @apply text-lg py-1 focus:outline-0 ;
-    }
+.dropdown{
+    @apply text-lg py-1 px-4 focus:outline-none border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200;
+}
 }
 
 
